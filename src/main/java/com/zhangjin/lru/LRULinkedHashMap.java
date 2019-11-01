@@ -22,6 +22,9 @@ public class LRULinkedHashMap<K, V> extends LinkedHashMap<K, V> {
     public LRULinkedHashMap(int maxCapacity) {
         super(maxCapacity, DEFAULT_LOAD_FACTOR, true);
         this.maxCapacity = maxCapacity;
+
+        byte[] b = new byte[1024];
+
     }
 
     @Override

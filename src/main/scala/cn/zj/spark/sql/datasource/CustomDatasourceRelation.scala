@@ -1,5 +1,6 @@
 package cn.zj.spark.sql.datasource
 
+import org.apache.spark.input.PortableDataStream
 import org.apache.spark.rdd.RDD
 import org.apache.spark.sql.{Row, SQLContext}
 import org.apache.spark.sql.sources._
@@ -29,6 +30,7 @@ class CustomDatasourceRelation(override val sqlContext : SQLContext, path : Stri
   override def buildScan(): RDD[Row] = {
     println("TableScan: buildScan called...")
 
+
     val schemaFields = schema.fields
     // Reading the file's content
     val rdd = sqlContext.sparkContext.wholeTextFiles(path).map(f => f._2)
@@ -48,6 +50,9 @@ class CustomDatasourceRelation(override val sqlContext : SQLContext, path : Stri
 
     rows.flatMap(e => e)
   }
+
+
+
 
   override def buildScan(requiredColumns: Array[String]): RDD[Row] = {
     println("PrunedScan: buildScan called...")

@@ -12,7 +12,7 @@ object app extends App {
   val conf = new SparkConf().setAppName("spark-custom-datasource")
   val spark = SparkSession.builder().config(conf).master("local").getOrCreate()
 
-  val df = spark.sqlContext.read.format("cn.zj.spark.sql.datasource").load("1229practice/data/")
+  val df = spark.sqlContext.read.format("cn.zj.spark.sql.datasource").load("E:\\Ideljava\\wokspaces\\spark-extend-dataSource\\data\\input1.txt")
 
   //print the schema
 //  df.printSchema()
@@ -31,7 +31,8 @@ object app extends App {
 
   //filter data
   df.createOrReplaceTempView("test")
-  spark.sql("select * from test where salary = 50000").show()
+  //spark.sql("select * from test where salary = 20000").show()
+  spark.sql("select * from test").show()
 
   println("Application Ended...")
 }

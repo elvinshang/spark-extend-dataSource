@@ -21,6 +21,9 @@ class DefaultSource extends RelationProvider with SchemaRelationProvider with Cr
     }
   }
 
+
+
+  //写
   override def createRelation(sqlContext: SQLContext, mode: SaveMode, parameters: Map[String, String],
                               data: DataFrame): BaseRelation = {
     val path = parameters.getOrElse("path", "./output/") //can throw an exception/error, it's just for this tutorial
