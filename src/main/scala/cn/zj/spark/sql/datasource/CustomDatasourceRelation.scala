@@ -18,11 +18,11 @@ class CustomDatasourceRelation(override val sqlContext : SQLContext, path : Stri
       userSchema
     } else {
       StructType(
-        StructField("id", IntegerType, false) ::
-        StructField("name", StringType, true) ::
-        StructField("gender", StringType, true) ::
-        StructField("salary", LongType, true) ::
-        StructField("expenses", LongType, true) :: Nil
+        StructField("id", StringType, false) ::
+          StructField("name", StringType, true) ::
+          StructField("gender", StringType, true) ::
+          StructField("salary", StringType, true) ::
+          StructField("expenses", StringType, true) :: Nil
       )
     }
   }
@@ -68,7 +68,7 @@ class CustomDatasourceRelation(override val sqlContext : SQLContext, path : Stri
         case (value, index) =>
           val colName = schemaFields(index).name
           val castedValue = Util.castTo(if (colName.equalsIgnoreCase("gender")) {if(value.toInt == 1) "Male" else "Female"} else value,
-                                        schemaFields(index).dataType)
+            schemaFields(index).dataType)
           if (requiredColumns.contains(colName)) Some(castedValue) else None
       })
 
